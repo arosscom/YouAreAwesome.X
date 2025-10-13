@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var message = "I am a Programmer"                                        // struct is immutable - need @State to mutate
+                                                                                            // view is redrawn when variable changes (Declarative)
     var body: some View {
         
         VStack {
@@ -15,10 +18,14 @@ struct ContentView: View {
                 .resizable()
                 .scaledToFit()
                 .foregroundStyle(.orange)
-            Text("I am an App Developer !")
+            Text(message)
                 .font(.largeTitle)
                 .fontWeight(.heavy)
                 .foregroundStyle(.red)
+             
+            Button("Click Me!") {
+                message = "Awesome!"
+            }
         }
         .padding()
     }
