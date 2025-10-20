@@ -8,46 +8,50 @@
 import SwiftUI
 
 struct ContentView: View {
+        
+    @State private var toggle = false
+    @State private var message = ""                                         // struct is immutable - need @State to mutate
+    @State private var imageName = ""
+    @State private var imageNumber = 0
     
-    
-    private var button1Text = "Awesome"
-    private var button2Text = "Great"
-
-    @State private var message = "I am a Programmer"                                        // struct is immutable - need @State to mutate
-                                                                                            // view is redrawn when variable changes (Declarative)
     var body: some View {
         
+        // Examples of Annotations:
+        // TODO: this
+        // MARK: this other
+        // FIXME: - this also -
+        
         VStack {
-            
             Spacer()
             
-            Image(systemName: "swift")
+            Image(imageName)
                 .resizable()
                 .scaledToFit()
-                .foregroundStyle(.orange)
-                .frame(width: 200, height: 200)
-            
+                .clipShape(RoundedRectangle(cornerRadius: 30))
+                .shadow(radius: 30)
+              
             Text(message)
                 .font(.largeTitle)
-                .fontWeight(.ultraLight)
-            
+                .fontWeight(.heavy)
+                .foregroundStyle(.red)
             Spacer()
-            
-            HStack {
-                Button(button1Text) {
-                    message = button1Text+"!"
+                                                                                                        
+            Button("Show Message") {
+                let message0 = "You are Awesome!"
+                let message1 = "You are Great!"
 
+                message = ( message == message0 ? message1 : message0)
+                imageNumber += 1
+                if imageNumber > 9 {
+                    imageNumber = 0
                 }
-                Button(button1Text) {
-                    message = button2Text+"!"
-                }
-            }
+                imageName = "image\(imageNumber)"
+             }
             .buttonStyle(.borderedProminent)
             .font(.title2)
-            .tint(.orange)
         }
-    
         .padding()
+                                                                                                          
     }
 }
 
